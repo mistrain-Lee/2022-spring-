@@ -1,0 +1,493 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled2.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyPF+WO0t9b9zsA2zcCHqHUq",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/mistrain-Lee/2022-spring-/blob/main/20220328(2).ipynb-%20%ED%8C%8C%EA%B8%B0\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Bu7cE886eYNi",
+        "outputId": "030ea9f7-efe6-443d-8907-79914d4f351d"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting gradio\n",
+            "  Downloading gradio-2.9.1-py3-none-any.whl (1.7 MB)\n",
+            "\u001b[?25l\r\u001b[K     |▏                               | 10 kB 23.0 MB/s eta 0:00:01\r\u001b[K     |▍                               | 20 kB 26.0 MB/s eta 0:00:01\r\u001b[K     |▋                               | 30 kB 32.0 MB/s eta 0:00:01\r\u001b[K     |▊                               | 40 kB 36.6 MB/s eta 0:00:01\r\u001b[K     |█                               | 51 kB 34.4 MB/s eta 0:00:01\r\u001b[K     |█▏                              | 61 kB 38.3 MB/s eta 0:00:01\r\u001b[K     |█▎                              | 71 kB 25.8 MB/s eta 0:00:01\r\u001b[K     |█▌                              | 81 kB 27.3 MB/s eta 0:00:01\r\u001b[K     |█▊                              | 92 kB 29.3 MB/s eta 0:00:01\r\u001b[K     |█▉                              | 102 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██                              | 112 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██▎                             | 122 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██▍                             | 133 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██▋                             | 143 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██▉                             | 153 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███                             | 163 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███▏                            | 174 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███▍                            | 184 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███▋                            | 194 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███▊                            | 204 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████                            | 215 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████▏                           | 225 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████▎                           | 235 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████▌                           | 245 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████▊                           | 256 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████▉                           | 266 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████                           | 276 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████▎                          | 286 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████▍                          | 296 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████▋                          | 307 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████▉                          | 317 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████                          | 327 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████▏                         | 337 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████▍                         | 348 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████▌                         | 358 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████▊                         | 368 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████                         | 378 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████▏                        | 389 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████▎                        | 399 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████▌                        | 409 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████▊                        | 419 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████▉                        | 430 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████                        | 440 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████▎                       | 450 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████▍                       | 460 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████▋                       | 471 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████▉                       | 481 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████                       | 491 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████▏                      | 501 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████▍                      | 512 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████▌                      | 522 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████▊                      | 532 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████                      | 542 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████▏                     | 552 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████▎                     | 563 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████▌                     | 573 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████▊                     | 583 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████▉                     | 593 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████                     | 604 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████▎                    | 614 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████▍                    | 624 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████▋                    | 634 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████▉                    | 645 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████                    | 655 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████▏                   | 665 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████▍                   | 675 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████▌                   | 686 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████▊                   | 696 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████                   | 706 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████                   | 716 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████▎                  | 727 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████▌                  | 737 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████▊                  | 747 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████▉                  | 757 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████                  | 768 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████▎                 | 778 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████▍                 | 788 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████▋                 | 798 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████▉                 | 808 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████                 | 819 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████▏                | 829 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████▍                | 839 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████▌                | 849 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████▊                | 860 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████                | 870 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████                | 880 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████▎               | 890 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████▌               | 901 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████▋               | 911 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████▉               | 921 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████               | 931 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████▎              | 942 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████▍              | 952 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████▋              | 962 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████▉              | 972 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████              | 983 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████▏             | 993 kB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████▍             | 1.0 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████▌             | 1.0 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████▊             | 1.0 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████             | 1.0 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████             | 1.0 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████▎            | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████▌            | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████▋            | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████▉            | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████            | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████▎           | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████▍           | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████▋           | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████▉           | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████           | 1.1 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▏          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▍          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▌          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████▊          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████          | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▎         | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▌         | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▋         | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████▉         | 1.2 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████         | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▏        | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▍        | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▋        | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████▉        | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████        | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▏       | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▍       | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▌       | 1.3 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████▊       | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████       | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████       | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▎      | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▌      | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▋      | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████▉      | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████      | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▏     | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▍     | 1.4 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▋     | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████▊     | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████     | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▏    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▍    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▌    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████▊    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████    | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▎   | 1.5 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▌   | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▋   | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████▉   | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████   | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▏  | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▍  | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▋  | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |█████████████████████████████▊  | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████  | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▏ | 1.6 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▍ | 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▌ | 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |██████████████████████████████▊ | 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████ | 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████ | 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▎| 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▌| 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▋| 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |███████████████████████████████▉| 1.7 MB 31.1 MB/s eta 0:00:01\r\u001b[K     |████████████████████████████████| 1.7 MB 31.1 MB/s \n",
+            "\u001b[?25hCollecting ffmpy\n",
+            "  Downloading ffmpy-0.3.0.tar.gz (4.8 kB)\n",
+            "Requirement already satisfied: requests in /usr/local/lib/python3.7/dist-packages (from gradio) (2.23.0)\n",
+            "Collecting uvicorn\n",
+            "  Downloading uvicorn-0.17.6-py3-none-any.whl (53 kB)\n",
+            "\u001b[K     |████████████████████████████████| 53 kB 2.4 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: pillow in /usr/local/lib/python3.7/dist-packages (from gradio) (7.1.2)\n",
+            "Collecting aiohttp\n",
+            "  Downloading aiohttp-3.8.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.1 MB)\n",
+            "\u001b[K     |████████████████████████████████| 1.1 MB 44.7 MB/s \n",
+            "\u001b[?25hCollecting markdown-it-py[linkify,plugins]\n",
+            "  Downloading markdown_it_py-2.0.1-py3-none-any.whl (84 kB)\n",
+            "\u001b[K     |████████████████████████████████| 84 kB 2.7 MB/s \n",
+            "\u001b[?25hCollecting pycryptodome\n",
+            "  Downloading pycryptodome-3.14.1-cp35-abi3-manylinux2010_x86_64.whl (2.0 MB)\n",
+            "\u001b[K     |████████████████████████████████| 2.0 MB 44.9 MB/s \n",
+            "\u001b[?25hCollecting fastapi\n",
+            "  Downloading fastapi-0.75.1-py3-none-any.whl (54 kB)\n",
+            "\u001b[K     |████████████████████████████████| 54 kB 2.4 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: matplotlib in /usr/local/lib/python3.7/dist-packages (from gradio) (3.2.2)\n",
+            "Collecting paramiko\n",
+            "  Downloading paramiko-2.10.3-py2.py3-none-any.whl (211 kB)\n",
+            "\u001b[K     |████████████████████████████████| 211 kB 41.3 MB/s \n",
+            "\u001b[?25hCollecting python-multipart\n",
+            "  Downloading python-multipart-0.0.5.tar.gz (32 kB)\n",
+            "Collecting analytics-python\n",
+            "  Downloading analytics_python-1.4.0-py2.py3-none-any.whl (15 kB)\n",
+            "Collecting pydub\n",
+            "  Downloading pydub-0.25.1-py2.py3-none-any.whl (32 kB)\n",
+            "Collecting orjson\n",
+            "  Downloading orjson-3.6.7-cp37-cp37m-manylinux_2_24_x86_64.whl (255 kB)\n",
+            "\u001b[K     |████████████████████████████████| 255 kB 66.4 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: pandas in /usr/local/lib/python3.7/dist-packages (from gradio) (1.3.5)\n",
+            "Requirement already satisfied: numpy in /usr/local/lib/python3.7/dist-packages (from gradio) (1.21.5)\n",
+            "Requirement already satisfied: charset-normalizer<3.0,>=2.0 in /usr/local/lib/python3.7/dist-packages (from aiohttp->gradio) (2.0.12)\n",
+            "Collecting multidict<7.0,>=4.5\n",
+            "  Downloading multidict-6.0.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (94 kB)\n",
+            "\u001b[K     |████████████████████████████████| 94 kB 3.7 MB/s \n",
+            "\u001b[?25hCollecting aiosignal>=1.1.2\n",
+            "  Downloading aiosignal-1.2.0-py3-none-any.whl (8.2 kB)\n",
+            "Collecting asynctest==0.13.0\n",
+            "  Downloading asynctest-0.13.0-py3-none-any.whl (26 kB)\n",
+            "Requirement already satisfied: typing-extensions>=3.7.4 in /usr/local/lib/python3.7/dist-packages (from aiohttp->gradio) (3.10.0.2)\n",
+            "Collecting frozenlist>=1.1.1\n",
+            "  Downloading frozenlist-1.3.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)\n",
+            "\u001b[K     |████████████████████████████████| 144 kB 53.6 MB/s \n",
+            "\u001b[?25hCollecting async-timeout<5.0,>=4.0.0a3\n",
+            "  Downloading async_timeout-4.0.2-py3-none-any.whl (5.8 kB)\n",
+            "Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.7/dist-packages (from aiohttp->gradio) (21.4.0)\n",
+            "Collecting yarl<2.0,>=1.0\n",
+            "  Downloading yarl-1.7.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (271 kB)\n",
+            "\u001b[K     |████████████████████████████████| 271 kB 52.5 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: idna>=2.0 in /usr/local/lib/python3.7/dist-packages (from yarl<2.0,>=1.0->aiohttp->gradio) (2.10)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from analytics-python->gradio) (1.15.0)\n",
+            "Collecting monotonic>=1.5\n",
+            "  Downloading monotonic-1.6-py2.py3-none-any.whl (8.2 kB)\n",
+            "Requirement already satisfied: python-dateutil>2.1 in /usr/local/lib/python3.7/dist-packages (from analytics-python->gradio) (2.8.2)\n",
+            "Collecting backoff==1.10.0\n",
+            "  Downloading backoff-1.10.0-py2.py3-none-any.whl (31 kB)\n",
+            "Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests->gradio) (3.0.4)\n",
+            "Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests->gradio) (1.24.3)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests->gradio) (2021.10.8)\n",
+            "Collecting starlette==0.17.1\n",
+            "  Downloading starlette-0.17.1-py3-none-any.whl (58 kB)\n",
+            "\u001b[K     |████████████████████████████████| 58 kB 6.0 MB/s \n",
+            "\u001b[?25hCollecting pydantic!=1.7,!=1.7.1,!=1.7.2,!=1.7.3,!=1.8,!=1.8.1,<2.0.0,>=1.6.2\n",
+            "  Downloading pydantic-1.9.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.9 MB)\n",
+            "\u001b[K     |████████████████████████████████| 10.9 MB 44.8 MB/s \n",
+            "\u001b[?25hCollecting anyio<4,>=3.0.0\n",
+            "  Downloading anyio-3.5.0-py3-none-any.whl (79 kB)\n",
+            "\u001b[K     |████████████████████████████████| 79 kB 7.6 MB/s \n",
+            "\u001b[?25hCollecting sniffio>=1.1\n",
+            "  Downloading sniffio-1.2.0-py3-none-any.whl (10 kB)\n",
+            "Collecting mdurl~=0.1\n",
+            "  Downloading mdurl-0.1.0-py3-none-any.whl (11 kB)\n",
+            "Collecting linkify-it-py~=1.0\n",
+            "  Downloading linkify_it_py-1.0.3-py3-none-any.whl (19 kB)\n",
+            "Collecting mdit-py-plugins\n",
+            "  Downloading mdit_py_plugins-0.3.0-py3-none-any.whl (43 kB)\n",
+            "\u001b[K     |████████████████████████████████| 43 kB 2.3 MB/s \n",
+            "\u001b[?25hCollecting uc-micro-py\n",
+            "  Downloading uc_micro_py-1.0.1-py3-none-any.whl (6.2 kB)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib->gradio) (1.4.0)\n",
+            "Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib->gradio) (3.0.7)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib->gradio) (0.11.0)\n",
+            "Requirement already satisfied: pytz>=2017.3 in /usr/local/lib/python3.7/dist-packages (from pandas->gradio) (2018.9)\n",
+            "Collecting bcrypt>=3.1.3\n",
+            "  Downloading bcrypt-3.2.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (61 kB)\n",
+            "\u001b[K     |████████████████████████████████| 61 kB 412 kB/s \n",
+            "\u001b[?25hCollecting pynacl>=1.0.1\n",
+            "  Downloading PyNaCl-1.5.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (856 kB)\n",
+            "\u001b[K     |████████████████████████████████| 856 kB 50.2 MB/s \n",
+            "\u001b[?25hCollecting cryptography>=2.5\n",
+            "  Downloading cryptography-36.0.2-cp36-abi3-manylinux_2_24_x86_64.whl (3.6 MB)\n",
+            "\u001b[K     |████████████████████████████████| 3.6 MB 50.9 MB/s \n",
+            "\u001b[?25hRequirement already satisfied: cffi>=1.1 in /usr/local/lib/python3.7/dist-packages (from bcrypt>=3.1.3->paramiko->gradio) (1.15.0)\n",
+            "Requirement already satisfied: pycparser in /usr/local/lib/python3.7/dist-packages (from cffi>=1.1->bcrypt>=3.1.3->paramiko->gradio) (2.21)\n",
+            "Requirement already satisfied: click>=7.0 in /usr/local/lib/python3.7/dist-packages (from uvicorn->gradio) (7.1.2)\n",
+            "Collecting h11>=0.8\n",
+            "  Downloading h11-0.13.0-py3-none-any.whl (58 kB)\n",
+            "\u001b[K     |████████████████████████████████| 58 kB 6.3 MB/s \n",
+            "\u001b[?25hCollecting asgiref>=3.4.0\n",
+            "  Downloading asgiref-3.5.0-py3-none-any.whl (22 kB)\n",
+            "Building wheels for collected packages: ffmpy, python-multipart\n",
+            "  Building wheel for ffmpy (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for ffmpy: filename=ffmpy-0.3.0-py3-none-any.whl size=4712 sha256=a399dd96fb517ce67b3ee9fdc596c261d2895f600ee57b19732dbd7116d7f396\n",
+            "  Stored in directory: /root/.cache/pip/wheels/13/e4/6c/e8059816e86796a597c6e6b0d4c880630f51a1fcfa0befd5e6\n",
+            "  Building wheel for python-multipart (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for python-multipart: filename=python_multipart-0.0.5-py3-none-any.whl size=31678 sha256=07af3b59f14af17d0feb2410333ab6928682599eca61907c5d5e57441355896a\n",
+            "  Stored in directory: /root/.cache/pip/wheels/2c/41/7c/bfd1c180534ffdcc0972f78c5758f89881602175d48a8bcd2c\n",
+            "Successfully built ffmpy python-multipart\n",
+            "Installing collected packages: sniffio, mdurl, uc-micro-py, multidict, markdown-it-py, frozenlist, anyio, yarl, starlette, pynacl, pydantic, monotonic, mdit-py-plugins, linkify-it-py, h11, cryptography, bcrypt, backoff, asynctest, async-timeout, asgiref, aiosignal, uvicorn, python-multipart, pydub, pycryptodome, paramiko, orjson, ffmpy, fastapi, analytics-python, aiohttp, gradio\n",
+            "Successfully installed aiohttp-3.8.1 aiosignal-1.2.0 analytics-python-1.4.0 anyio-3.5.0 asgiref-3.5.0 async-timeout-4.0.2 asynctest-0.13.0 backoff-1.10.0 bcrypt-3.2.0 cryptography-36.0.2 fastapi-0.75.1 ffmpy-0.3.0 frozenlist-1.3.0 gradio-2.9.1 h11-0.13.0 linkify-it-py-1.0.3 markdown-it-py-2.0.1 mdit-py-plugins-0.3.0 mdurl-0.1.0 monotonic-1.6 multidict-6.0.2 orjson-3.6.7 paramiko-2.10.3 pycryptodome-3.14.1 pydantic-1.9.0 pydub-0.25.1 pynacl-1.5.0 python-multipart-0.0.5 sniffio-1.2.0 starlette-0.17.1 uc-micro-py-1.0.1 uvicorn-0.17.6 yarl-1.7.2\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install gradio\n",
+        "import gradio as gr"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import requests\n",
+        "import pandas as pd"
+      ],
+      "metadata": {
+        "id": "kydKfQiCeuGd"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "URL = ('http://apis.data.go.kr/6470000/hanbokdict_g'\n",
+        "       '/entrydetail?'\n",
+        "       'serviceKey=zqTVSqJB7gvOCYQEuv41eMV5%2FHsQiqnjKlKazBjO%2BtpW6UxG2Ru8o9VCrexyRjI3iRupJWdD%2BlFiRuAENdgEsQ%3D%3D'\n",
+        "       '&dataKey=12'\n",
+        "       '&responseFormat=json') \n",
+        "response = requests.get(URL) # 한인문학사전 용어 상세정보"
+      ],
+      "metadata": {
+        "id": "JuxQg0SWe5AK"
+      },
+      "execution_count": 75,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "r= response.json()\n",
+        "r"
+      ],
+      "metadata": {
+        "id": "B2cYXN8HkIzt",
+        "outputId": "4bd1cdc8-93fd-4467-eb58-805dccadc3ce",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 76,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'headers': {'resultCode': '00', 'resultMsg': 'NORMAL SERVICE'},\n",
+              " 'item': {'category': '용어',\n",
+              "  'dataKey': '12',\n",
+              "  'keywords': '모던, 신한복',\n",
+              "  'mainText': '<p>개량(改良)이란 어떤 것의 질, 구조와 형태, 성능 등을 더 좋게 하는 것을 말한다. 역사적으로 우리 옷에 대한 개량의 주안점은 시기적으로 차이가 있다. 개량의 방법 역시 금제나 법령과 같이 강제성을 띤 것도 있으나 사회 속에서 자발적으로 이루어 진 것도 있다.</p>\\n<p>개량이 필요한 직접인 원인은 주로 질, 구조와 형태, 성능에 근거하지만 소위 ‘복요(服妖 )’라 하여 차림새와 그로 인한 사회 질서를 어지럽히는 경우에도 개량을 하였다. 하지만 개량의 결과가 반드시 좋았던 것만은 아니다. 특히 개항 이후 전통복식에 대한 개량은 역사적으로 이어 내려왔던 전통적인 복식미와 풍부한 옷의 종류가 기능성과 시대성 강조로 인해 많은 부분 상실되기도 하였다.</p>\\n<p>일반적으로 개량복식이라 하면 개항기 이후 복식의 변화에 대한 변화를 지칭하는 용어로 받아들여지고 있지만 조선시대 초기에도 여성복식을 중심으로 개량에 대한 논의가 있었으며 중 후기에는 실학사상을 바탕으로 허례보다는 복식의 편리성, 융통성을 위주로 한 개량이 이루어졌다. 조선시대에 연암 박지원, 우암 송시열, 도암 이재, 한정당, 송문흠, 박규수 등은 복식 개량에 대한 명분을 명확히 세워 그 필요성을 논했던 대표적인 인물들이다.</p>\\n<p>조선 시대 여성복식에 대한 개량은 여성복과 꾸밈의 사치, 요사스런 착용 방식, 남자옷의 혼용 등에 대한 개량 등 주로 형태와 착장 방식, 옷의 가짓수로 발생하는 폐단과 관련한 풍속개량에 관한 것이 주를 이룬다. 반면 박지원은 남자 철릭의 소매가 넓고 길어 유사시에 착용하는 융복(戎服)으로서의 기능성이 떨어지므로 개량할 것을 주장하였고 이덕무는 모정이 높고 양태가 넓은 흑립이 보기에도 볼품이 없고 쓰고 다니기에도 불편함으로 패랭이는 좀 더 품위 있게 개량하여 여름용으로 쓰고, 전립을 실용적인 형태로 개량하여 겨울용 쓰개로 쓸 것을 소하였다. 뿐만 아니라 사모의 긴 각과 소매가 넓은 단령, 단령 위에 띠는 품대가 헐렁하여 불편함으로 이를 개량해야 한다는 의견을 제시하였다. 그러나 이러한 개량의 필요성과 실현성은 새로운 왕조가 바뀌거나 사회가 추구하는 바에 따라 반드시 지속적으로 이어지지는 않았다.</p>\\n<p>그러나 갑오개혁과 갑신의제 개혁은 이와는 다른 법제적인 성격의 개량 혹은 개혁이었다. 또한 공적인 성격이 강해 주로 관리들의 관복과 쓰개에 대한 간소화정책으로 관복의 소매를 좁게 하고 색을 통일화 시키는 것과 예복, 혼례복, 상복(喪服)에 대한 개량이 제시되었다. </p>\\n<p>한편 여성복식의 개량은 여성의 교육 기회 부여와 양장의 도입과 유행, 전통적인 성 역할 변화 등 사회 변화와 함께 적극적인 복식 개량이 진행되었다. 일본잡지 〈모던 일본과 조선〉 1940년대 판에 주월경(朱月瓊)은 ‘조선복 활용법’이란 제목으로 조선복을 어떻게 활용하고 개량해야 할지에 대해 단순히 형태, 색상, 문양만으로 개량이 가능한 방법을 예시로 제안하였다. </p>\\n<p>당시 부인복은 예로부터 내려오는 전통복식과 양장화된 소위 현대적인 것의 두 가지가 있는데 첫 번째로 형태를 변화시키는 방법으로는 전통적인 부인복은 우아한 아름다움과 정적인 미가 있으니 예복 혹은 외출복으로 사용하고 반면 이를 개량하여 변화를 줄 수 있는데 개량된 한복은 속옷도 양장용을 입는다. 치마는 통치마로 만들어 허리를 달고 길이를 길게 하거나 주름을 잘게 잡아 이브닝드레스. 웨딩드레스. 에프터눈 드레스를 만들어 입을 것을 제안하였다. 또 저고리는 고름을 달되 각자의 허리선을 표준으로 하는 것이 좋고 또는 단추로 고정하면 활동적이고 편리함을 추구할 수 있다고 하였다. 또한 치마를 짧게 하여 홈드레스나 스포츠드레스, 산책 시에 적합하다고 하였다. <br />\\n둘째 색상은 전통적으로 단순한 색이 많이 사용되었는데 노랑 저고리에 진한 다홍색 옷감을 깃, 고름, 소매에 대고 잘게 주름잡은 감색, 빨강 치마 등을 대표적으로 입는데 이 같은 전통적인 배색보다 다갈색으로 깃, 소매 등을 하는 것도 제법 오래도록 쓸 만하다고 하여 전통배색을 벗어난 배색의 중요성을 강조하였다. 실지 경성 같은 도회지에서는 고상한 색상의 조선옷이 왕왕 보이는데 용도를 잘 살리면 더 좋은 결과가 있을 것이라 하였다.<br />\\n셋째로는 체격에 따라 무늬가 있는 옷감을 사용할 것을 권하고 있다. 일본 옷감이 그다지 사용되고 있지 않는 이유는 저고리는 소매폭도 좁고 길이가 짧아서 무늬가 큰 것은 어울리지 않기 때문이라고 하였다. 하지만 일본 옷감 중에서 굵고 마디가 많은 쌍고치실이나 방적견사 등으로 촘촘하게 짠 평직의 견직물인 메센과 같은 작고 단순한 것은 치마로 사용가능하다고 하였다. 그러나 무엇보다도 이 기사의 가장 중요한 핵심은 “어쨌든 조선의 청초하고 담백한 전통은 어디까지나 살려 나갔으면 합니다.”라고 쓴 마지막 한 줄에 있다. </p>\\n<p>우리 한복이 또다시 변화되기 시작한 것은 1960년대 전후라고 할 수 있다. 6·25 전쟁 이후 경제 부흥과 재건으로 부족한 인력을 충당하기 위해 여성들도 사회진출을 할 수 있었다. 일의 효율성을 높이기 위해 양장을 장려하고 한복의 장점보다 불편함을 내세워 한복의 개량 및 간소화를 추구했다. 이를 계기로 1950년대 말에는 서양복 디자이너들이 소위 개량한복에 관심 갖고 한복 산업에 뛰어들어 패턴과 재단, 봉제에 서양바느질법이 접목되었다. 우리나라 서양복 디자이너 1세대 노라노 씨가 최초로 아리랑저고리를 선보였고 경제 발전으로 접대 문화가 확산되면서 업소에서 공연과 접대를 위해 한복을 입으면서 한복의 이미지가 평가 절하되기 시작했다. 1957년을 전후하여 수입산 비로도가 최고의 혼수품으로 각광받으면서 값비싼 비로도 한복 치마가 유행하면서 비로도로 만든 통치마를 입고 차에 타서는 비로도의 결이 눌릴까봐 치마를 들쳐 올려 앉아 다른 사람에게 속옷을 보여주는 것이 아무렇지도 않았던 풍경을 자아내기도 했다.</p>\\n<p>1960년대 말에는 양장보급과 양장지 수입이 더욱 확산되면서 한복은 명절이나 집안 대소사 잔치에 입는 예복, 노인들의 옷으로 인식되면서 전통 한복은 서랍 속에서 어쩌다 꺼내 입는 옷이 되었다. 한편 예단만큼은 여전히 한복 옷감을 선호했는데 다만 전통적인 문양이나 색감의 전통 옷감보다는 양장지 한복감을 예단으로 보내는 것을 더 선호하였다. 이것은 당시 유행의 요소도 있지만 한복 소재가 갖고 있는 개량의 여지가 있는 부분들, 다시 말해 시대와는 좀 동떨어진 전통적인 문양과 색채, 세탁과 관리 등 이런 것들에 대한 개량의 필요성이 내재되어 있던 것은 아닐까? 아니면 60년대 서양에서 유행하고 있던 미니멀니즘 예술 사조의 영향인가? 한복은 마치 싱글 양복처럼 치마저고리 1벌을 위아래 같은 감으로 하는 것이 유행이었으며 어쨋든 치마저고리를 서로 다른 색으로 해 입는 것이 전통이었던 한복은 형태는 투피스지만 멀리서 보면 아래위가 한 벌 같은 느낌을 갖게 하기에 충분했다. 옷감 역시 소위 물실크나 나일론 양장지가 유행하면서 전체적인 볼륨감이 줄어들고 물빨래가 가능한 것을 선호하였다. </p>\\n<p>1970년대에는 실용성에 중점을 둔 1960년대식 개량과는 달리 미스코리아의 세계무대 진출을 계기로 한복의 현대화와 예복화에 현대적인 감각을 살린 디자인을 강조하면서 동양인의 단점을 보완하기 위해 치마 재단에 고어드 재단법을 도입하여 키가 커 보이고 날씬해 보이도록 하고 여기에 저고리 고름을 길게 하여 키가 커 보이는 착시현상을 주었다. 반면 저고리 품은 작게 하고 겉섶선을 사선으로 달아 앞품에만 여유를 주어 브래지를 착용하고도 한복을 입을 수 있게 하였다.</p>\\n<p>1980년대에는 생활한복 붐이 불면서 일상에서 입을 수 있는 실용적인 소재와 모시, 삼베 등과 같은 천연 소재가 유행하고 대량생산과 기성복화가 진행되면서 서양복과 접목된 디자인 개발과 용도에 맞게 디자인도 다양해졌다. 한편 전통 한복은 가격대비 입을 기회가 많지 않고 겨울에도 난방이 잘 되기 때문에 노방으로 만든 사철깨끼 한복 한 벌만 있으면 사시사철 입을 수 있는 한복이 유행했다. 1986 아시안 게임의 국내 개최를 계기로 전통 한복의 고유한 멋을 살려야 한다는 목소리도 높아졌던 반면 한복의 세계화를 위한 생활한복의 중요성도 강조되어 동정 없는 저고리와 한복을 현대적으로 디자인한 한복 웨딩드레스도 주목받았다. 그러나 86〮88국제 행사를 통해 생중계되는 우리의 전통 문화를 전통한복으로 보여줘야 한다는 목소리도 높아 실용적인 소재 쪽으로 개량에 초점을 두었던 생활한복은 전통미를 살릴 수 없다는 의견이 많아 치마저고리 위에 단아한 아름다움이 느껴질 수 있는 중간 색조의 반두루마기가 복고풍으로 유행하였다. </p>\\n<p>1990년대는 한복의 쇠퇴기라 할 수 있다. 전통 한복에 대한 관심과 수요가 줄자 학계, 산업계가 힘을 합쳐 우리 옷에 대한 관심과 위상을 높이는 데 중지를 모아 1996년 12월 4일을 ‘한복의 날’로 선포하고 전통한복과 생활한복 발전을 위해 노력하였다.</p>\\n<p>2007년에는 한스타일 육성 사업에 한복이 포함되면서 이후 한복의 세계화, 산업화를 목표로 다양한 한복 디자인 개발 사업과 한복의 대중화, 한복입기실천사업이 진행, 한복대여점 확산 등 한복의 생산, 유통 분야의 변화가 발 빠르게 진행되었다. 2010년 이후부터는 특히 젊은이들이 한복에 관심을 갖으면서 전통한복, 생활한복, 디자인한복, 신한복, 데일리한복 등 다양한 명칭이 생겨나고 있으며 전통한복과 현대적 디자인이 결합된 새로운 형태의 트랜디한 한복들이 유행하고 있다. </p>\\n<p>지금 이 시대가 요구하는 개량한복은 서양복과 한복이 일상의 옷차림에서 따로 또 같이 입을 수 있는 착장과 디자인 개발에 초점을 두고 새로운 개량의 시도들이 젊은이들의 감각으로 진행되고 있다. 이렇듯 한복의 개량은 단순히 즉흥적으로 진행된 것이 아니라 오랜 역사를 거쳐 시대적인 요구에 따라 용도, 종류, 착용하는 옷의 수, 형태와 소재, 디자인, 재단법과 봉제방법, 착용방법 다양한 영역에서 꾸준히 진행되어 왔다.</p>',\n",
+              "  'reference': '1950년대 사회풍조와 한복착용에 관한 연구(윤양노, 「민속학연구」, vol.25), 일본잡지 모던일본과 조선 1940(한일비교문화연구센터, 홍선영외 3인 역, 어문학사, 2009), 하재일기로 본 개항기 의생활(윤양노, 「한복문화」, Vol17, No.2), 한국의식주생활사전-의생활(국립민속박물관, 2017)',\n",
+              "  'title': '개량한복',\n",
+              "  'titleAlias': '개량복, 생활한복',\n",
+              "  'titleHanja': None}}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 76
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "items = r['resultCode'] ['title']['items']"
+      ],
+      "metadata": {
+        "id": "yKP0wjQOk6AF",
+        "outputId": "3e7b0bda-dd0d-4794-b25b-d259891843e8",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 172
+        }
+      },
+      "execution_count": 34,
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "KeyError",
+          "evalue": "ignored",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mKeyError\u001b[0m                                  Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-34-c177f54fba5a>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0mitems\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mr\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'resultCode'\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m'title'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m'items'\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mKeyError\u001b[0m: 'resultCode'"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "response\n",
+        "# 일단은 성공"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QuajpuR_h-jr",
+        "outputId": "86dd1e30-5675-4234-8610-4b39cb73fb10"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<Response [200]>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "response = requests.get(URL).json\n",
+        "response"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uL_QgRWegfbD",
+        "outputId": "f8c69f8e-6171-40ac-9244-7fbdcb1bd3d5"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<bound method Response.json of <Response [200]>>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "http://jsonviewer.stack.hu/ #편의상"
+      ],
+      "metadata": {
+        "id": "_RBoQS4PgquD"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import json"
+      ],
+      "metadata": {
+        "id": "5Ts2C17pmPkS"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "r = requests.get(URL).json()\n",
+        "r\n",
+        "# json 뒤에 괄호가 없으면 bound method response가 뜬다... "
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VJjY8cyEg9Yj",
+        "outputId": "963ec165-b9ac-4116-bc6f-15cf506a527b"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'headers': {'resultCode': '00', 'resultMsg': 'NORMAL SERVICE'},\n",
+              " 'numOfRows': 10,\n",
+              " 'pageNo': 1,\n",
+              " 'query': '',\n",
+              " 'results': [{'category': '용어',\n",
+              "   'dataKey': '12',\n",
+              "   'keywords': '모던, 신한복',\n",
+              "   'title': '개량한복',\n",
+              "   'titleHanja': None},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '72',\n",
+              "   'keywords': '단발, 단발령, 을미개혁',\n",
+              "   'title': '단발령',\n",
+              "   'titleHanja': '斷髮令'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '105',\n",
+              "   'keywords': '단발랑, 송곳구두, 신여성, 실크스타킹, 양산, 여학생, 트레머리, 핸드백',\n",
+              "   'title': '모던걸',\n",
+              "   'titleHanja': 'Modern girl'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '106',\n",
+              "   'keywords': '구두, 남촌, 맥주, 모자, 시계, 양복, 축음기, 혼부라',\n",
+              "   'title': '모던보이',\n",
+              "   'titleHanja': 'Modern boy'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '123',\n",
+              "   'keywords': '규중칠우, 침선, 침선비',\n",
+              "   'title': '바느질',\n",
+              "   'titleHanja': '針線'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '163',\n",
+              "   'keywords': '거풍, 궤, 녹두풀, 다리미, 밞다듬이, 쌀뜨물, 잿물, 팥가루, 홍두깨, 횃대',\n",
+              "   'title': '세탁, 푸새, 다듬이질, 갈무',\n",
+              "   'titleHanja': '洗濯'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '314',\n",
+              "   'keywords': '한복 대여업체',\n",
+              "   'title': '퓨전한복',\n",
+              "   'titleHanja': None}],\n",
+              " 'totalCount': 7}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 9
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "type(r)"
+      ],
+      "metadata": {
+        "id": "rQV62rYlfyV3",
+        "outputId": "ebf7d073-b547-470e-f083-370fb1ad50b6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dict"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "r"
+      ],
+      "metadata": {
+        "id": "XGxfuJyAiuqW",
+        "outputId": "e1af35ca-2f38-4cee-8fec-7cbfb4176897",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'headers': {'resultCode': '00', 'resultMsg': 'NORMAL SERVICE'},\n",
+              " 'numOfRows': 10,\n",
+              " 'pageNo': 1,\n",
+              " 'query': '',\n",
+              " 'results': [{'category': '용어',\n",
+              "   'dataKey': '12',\n",
+              "   'keywords': '모던, 신한복',\n",
+              "   'title': '개량한복',\n",
+              "   'titleHanja': None},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '72',\n",
+              "   'keywords': '단발, 단발령, 을미개혁',\n",
+              "   'title': '단발령',\n",
+              "   'titleHanja': '斷髮令'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '105',\n",
+              "   'keywords': '단발랑, 송곳구두, 신여성, 실크스타킹, 양산, 여학생, 트레머리, 핸드백',\n",
+              "   'title': '모던걸',\n",
+              "   'titleHanja': 'Modern girl'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '106',\n",
+              "   'keywords': '구두, 남촌, 맥주, 모자, 시계, 양복, 축음기, 혼부라',\n",
+              "   'title': '모던보이',\n",
+              "   'titleHanja': 'Modern boy'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '123',\n",
+              "   'keywords': '규중칠우, 침선, 침선비',\n",
+              "   'title': '바느질',\n",
+              "   'titleHanja': '針線'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '163',\n",
+              "   'keywords': '거풍, 궤, 녹두풀, 다리미, 밞다듬이, 쌀뜨물, 잿물, 팥가루, 홍두깨, 횃대',\n",
+              "   'title': '세탁, 푸새, 다듬이질, 갈무',\n",
+              "   'titleHanja': '洗濯'},\n",
+              "  {'category': '용어',\n",
+              "   'dataKey': '314',\n",
+              "   'keywords': '한복 대여업체',\n",
+              "   'title': '퓨전한복',\n",
+              "   'titleHanja': None}],\n",
+              " 'totalCount': 7}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 21
+        }
+      ]
+    }
+  ]
+}
